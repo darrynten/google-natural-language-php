@@ -1,0 +1,26 @@
+{
+  "name": "darrynten/google-natural-language-php",
+  "description": "PHP Google Natural Language Client with Extras",
+  "type": "library",
+  "require": {
+    "php": "^5.5.9 || ^7.0",
+    "guzzlehttp/guzzle": "^6.2.1",
+    "darrynten/any-cache": "^1.0"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "~5.0",
+    "mockery/mockery": "dev-master",
+    "internations/http-mock": "^0.8.1",
+    "vlucas/phpdotenv": "^2.4",
+    "google/cloud": "^0.20.2"
+  },
+  "config": {
+    "bin-dir": "bin"
+  },
+  "autoload": {
+    "psr-4": {
+      "DarrynTen\\GoogleNaturalLanguagePhp\\": "src/"
+    },
+    "exclude-from-classmap": ["/Tests/"]
+  }
+}
