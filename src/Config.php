@@ -2,35 +2,135 @@
 
 namespace DarrynTen\GoogleNaturalLanguagePhp;
 
-use DarrynTen\AnyCache\AnyCache;
+use DarrynTen\GoogleNaturalLanguagePhp\CustomException;
 
-use DarrynTen\GoogleNaturalLanguagePhp\GoogleNaturalLanguagePhpException;
-
+/**
+ * GoogleNaturalLanguage Config
+ *
+ * @category Configuration
+ * @package  GoogleNaturalLanguagePhp
+ * @author   Darryn Ten <darrynten@github.com>
+ * @license  MIT <https://github.com/darrynten/google-natural-language-php/LICENSE>
+ * @link     https://github.com/darrynten/google-natural-language-php
+ */
 class Config
 {
+    /**
+     * The project ID
+     *
+     * @var string $projectId
+     */
     public $projectId;
 
+    /**
+     * The type of text.
+     *
+     * Options are `PLAIN_TEXT` and `HTML`
+     *
+     * @var enum $type
+     */
     public $type = 'PLAIN_TEXT';
+
+    /**
+     * The encoding
+     *
+     * Options are `UTF8`, `UTF16`, `UTF32` and `NONE`
+     *
+     * @var enum $encoding
+     */
     public $encoding = 'UTF8';
+
+    /**
+     * The language
+     *
+     * If this is not set then it is auto-detected.
+     *
+     * @var $language The language in either `en` or `en-ZA` format
+     */
     public $language;
 
+    /**
+     * Whether or not to use caching.
+     *
+     * The default is true as this is a good idea.
+     *
+     * @var boolean $cache
+     */
     public $cache = true;
+
+    /**
+     * Cheapskate mode - trim text at 1000 chars
+     *
+     * @var boolean $cheapskate
+     */
     public $cheapskate = true;
 
+    /**
+     * Custom Auth Cache
+     *
+     * @var CacheItemPoolInterface $authCache
+     */
     public $authCache;
+
+    /**
+     * Custom Auth Cache options
+     *
+     * @var array $authCacheOptions
+     */
     public $authCacheOptions;
+
+    /**
+     * Custom Auth HTTP Handler
+     *
+     * @var callable $authHttpHandler
+     */
     public $authHttpHandler;
+
+    /**
+     * Custom REST HTTP Handler
+     *
+     * @var callable $httpHandler
+     */
     public $httpHandler;
+
+    /**
+     * A custom key file for auth
+     *
+     * @var json $keyFile
+     */
     public $keyFile;
+
+    /**
+     * A path on disk to the key file
+     *
+     * @var string $keyFilePath
+     */
     public $keyFilePath;
-    public $retries;
+
+    /**
+     * The number of times to retry failed calls
+     *
+     * @var integer $retries
+     */
+    public $retries = 3;
+
+    /**
+     * The scopes
+     *
+     * @var array $scopes
+     */
     public $scopes;
 
+    /**
+     * Construct the config object
+     *
+     * @param array $config An array of configuration options
+     */
     public function __construct($config)
     {
         // Throw exceptions on essentials
         if (!isset($config['projectId']) || empty($config['projectId'])) {
-            throw new GoogleNaturalLanguagePhpException('Missing Google Natural Language Project ID');
+            throw new CustomException('Missing Google Natural Language Project ID');
         } else {
             $this->projectId = (string)$config['projectId'];
         }
@@ -46,7 +146,7 @@ class Config
 
         /**
          * TODO
-         *
+         
         if (isset($config['authCache']) && !empty($config['authCache'])) {
             $this->authCache = (bool)$config['cache'];
         }
@@ -82,7 +182,13 @@ class Config
         }
     }
 
-    public function getNaturalLanguageConfig() {
+    /**
+     * Retrieves the expected config for the Natural Language API
+     *
+     * @return array
+     */
+    public function getNaturalLanguageConfig()
+    {
         $config = [
             'projectId' => $this->projectId
         ];

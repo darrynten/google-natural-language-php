@@ -14,11 +14,11 @@ namespace DarrynTen\GoogleNaturalLanguagePhp;
 use \Exception;
 
 /**
- * Custom exception for Clarifai
+ * Custom exception for GoogleNaturalLanguage Client
  *
- * @package Clarifai
+ * @package GoogleNaturalLanguagePhp
  */
-class GoogleNaturalLanguagePhpException extends Exception
+class CustomException extends Exception
 {
 
     /**
