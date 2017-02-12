@@ -17,17 +17,24 @@ class GoogleNaturalLanguagePhpExceptionTest extends PHPUnit_Framework_TestCase
         ], 'xxx');
     }
 
-    public function testApiJsonException() {
+    public function testApiJsonException()
+    {
         $this->expectException(CustomException::class);
 
-        throw new CustomException(json_encode([
-          'errors' => [
-            'code' => 1
-          ]
-        ]));
+        throw new CustomException(json_encode(
+            [
+                'errors' => [
+                    'code' => 1
+                ],
+                'status' => 404,
+                'title' => 'Not Found',
+                'detail' => 'Details'
+            ]
+        ));
     }
 
-    public function testCheapskateTriggerException() {
+    public function testCheapskateTriggerException()
+    {
         $this->expectException(CustomException::class);
 
         $config = [
@@ -40,4 +47,3 @@ class GoogleNaturalLanguagePhpExceptionTest extends PHPUnit_Framework_TestCase
         $instance->setText(str_repeat('test ', 1000));
     }
 }
-

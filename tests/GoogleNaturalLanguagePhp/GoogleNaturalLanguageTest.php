@@ -7,7 +7,7 @@ use DarrynTen\AnyCache\AnyCache;
 
 use DarrynTen\GoogleNaturalLanguagePhp\GoogleNaturalLanguage;
 
-class GoogleNaturalLanguagePhpTest extends PHPUnit_Framework_TestCase
+class GoogleNaturalLanguageTest extends PHPUnit_Framework_TestCase
 {
     public function testConstruct()
     {
@@ -19,7 +19,8 @@ class GoogleNaturalLanguagePhpTest extends PHPUnit_Framework_TestCase
         $this->assertInstanceOf(GoogleNaturalLanguage::class, $instance);
     }
 
-    public function testSet() {
+    public function testSet()
+    {
         $config = [
             'projectId' => 'project-id',
             'cheapskate' => true,
@@ -59,7 +60,8 @@ class GoogleNaturalLanguagePhpTest extends PHPUnit_Framework_TestCase
         $instance->setCache(true);
     }
 
-    public function testGetEntities() {
+    public function testGetEntities()
+    {
         if (getenv('DO_LIVE_API_TESTS') == "true") {
             $config = [
                 'projectId' => 'project-id',
@@ -87,9 +89,10 @@ class GoogleNaturalLanguagePhpTest extends PHPUnit_Framework_TestCase
         }
     }
 
-    public function testGetSyntax() {
+    public function testGetSyntax()
+    {
         if (getenv('DO_LIVE_API_TESTS') == "true") {
-             $config = [
+            $config = [
                 'projectId' => 'project-id',
                 'cheapskate' => true,
                 'cache' => true,
@@ -117,9 +120,10 @@ class GoogleNaturalLanguagePhpTest extends PHPUnit_Framework_TestCase
         }
     }
 
-    public function testGetSentiment() {
+    public function testGetSentiment()
+    {
         if (getenv('DO_LIVE_API_TESTS') == "true") {
-             $config = [
+            $config = [
                 'projectId' => 'project-id',
                 'cheapskate' => true,
                 'cache' => true,
@@ -140,9 +144,10 @@ class GoogleNaturalLanguagePhpTest extends PHPUnit_Framework_TestCase
         }
     }
 
-    public function testGetAll() {
+    public function testGetAll()
+    {
         if (getenv('DO_LIVE_API_TESTS') == "true") {
-             $config = [
+            $config = [
                 'projectId' => 'project-id',
                 'cheapskate' => true,
                 'cache' => true,
@@ -171,9 +176,6 @@ class GoogleNaturalLanguagePhpTest extends PHPUnit_Framework_TestCase
             $this->assertInternalType('string', $language);
 
             $this->assertEquals('en', $language);
-
         }
     }
 }
-
-
