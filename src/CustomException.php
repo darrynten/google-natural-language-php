@@ -33,7 +33,7 @@ class CustomException extends Exception
         // Construct message from JSON if required.
         if (substr($message, 0, 1) === '{') {
             $messageObject = json_decode($message);
-            $message = $messageObject->status .
+            $message = ($messageObject->status || '') .
               ': ' . $messageObject->title .
               ' - ' . $messageObject->detail;
 
