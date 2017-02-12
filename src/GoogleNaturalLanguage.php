@@ -60,7 +60,9 @@ class GoogleNaturalLanguage
     {
         $this->config = new Config($config);
         $this->_cache = new AnyCache();
-        $this->_languageClient = new NaturalLanguageClient($this->config->getNaturalLanguageConfig());
+        $this->_languageClient = new NaturalLanguageClient(
+            $this->config->getNaturalLanguageConfig()
+        );
     }
 
     /**
@@ -83,7 +85,8 @@ class GoogleNaturalLanguage
      */
     public function getEntities()
     {
-        $cacheKey = '__google_natural_language__entities_' . md5($this->originalText) . '_';
+        $cacheKey = '__google_natural_language__entities_' .
+            md5($this->originalText) . '_';
 
         if (!$result = unserialize($this->_cache->get($cacheKey))) {
             $result = $this->_languageClient->analyzeEntities($this->originalText);
@@ -100,7 +103,8 @@ class GoogleNaturalLanguage
      */
     public function getSentiment()
     {
-        $cacheKey = '__google_natural_language__sentiment_' . md5($this->originalText) . '_';
+        $cacheKey = '__google_natural_language__sentiment_' .
+            md5($this->originalText) . '_';
 
         if (!$result = unserialize($this->_cache->get($cacheKey))) {
             $result = $this->_languageClient->analyzeSentiment($this->originalText);
@@ -117,7 +121,8 @@ class GoogleNaturalLanguage
      */
     public function getSyntax()
     {
-        $cacheKey = '__google_natural_language__syntax_' . md5($this->originalText) . '_';
+        $cacheKey = '__google_natural_language__syntax_' .
+            md5($this->originalText) . '_';
 
         if (!$result = unserialize($this->_cache->get($cacheKey))) {
             $result = $this->_languageClient->analyzeSyntax($this->originalText);
@@ -134,7 +139,8 @@ class GoogleNaturalLanguage
      */
     public function getAll()
     {
-        $cacheKey = '__google_natural_language__all_' . md5($this->originalText) . '_';
+        $cacheKey = '__google_natural_language__all_' .
+            md5($this->originalText) . '_';
 
         if (!$result = unserialize($this->_cache->get($cacheKey))) {
             $result = $this->_languageClient->annotateText($this->originalText);
@@ -158,7 +164,12 @@ class GoogleNaturalLanguage
     {
         if (strlen($this->originalText) > 999) {
             if ($this->config->cheapskate === true) {
-                throw new CustomException('Text too long. 1000+ Characters incurrs additional charges. You can set `cheapskate` to false in config to disable this guard. Additional charges are per 1000 Characters.');
+                throw new CustomException(
+                    'Text too long. 1000+
+                    Characters incurrs additional charges. You can set
+                    `cheapskate` to false in config to disable this
+                    guard. Additional charges per 1000 Characters.'
+                );
             }
         }
     }

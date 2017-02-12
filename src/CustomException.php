@@ -23,13 +23,20 @@ class CustomException extends Exception
 
     /**
      * @inheritdoc
+     *
+     * @param string    $message  The message to throw
+     * @param integer   $code     The error code to throw
+     * @param Exception $previous The previous exception
      */
     public function __construct($message = "", $code = 0, Exception $previous = null)
     {
         // Construct message from JSON if required.
         if (substr($message, 0, 1) === '{') {
             $messageObject = json_decode($message);
-            $message = $messageObject->status . ': ' . $messageObject->title . ' - ' . $messageObject->detail;
+            $message = $messageObject->status .
+              ': ' . $messageObject->title .
+              ' - ' . $messageObject->detail;
+
             if (!empty($messageObject->errors)) {
                 $message .= ' ' . serialize($messageObject->errors);
             }
