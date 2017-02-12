@@ -87,16 +87,16 @@ class Validation
      */
     public static function isValidLanguageRegex($language)
     {
-      $match = false;
+        $match = false;
 
-      if (preg_match(self::$validISOLanguageRegex, $language)) {
-          $match = true;
-      }
+        if (preg_match(self::$validISOLanguageRegex, $language)) {
+            $match = true;
+        }
 
-      if (preg_match(self::$validBCP47LanguageRegex, $language)) {
-          $match = true;
-      }
+        if (preg_match(self::$validBCP47LanguageRegex, $language)) {
+            $match = true;
+        }
 
-      return $match;
+        return $match;
     }
 }

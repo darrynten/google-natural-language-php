@@ -162,7 +162,6 @@ class Config
         if (isset($config['httpHandler']) && !empty($config['httpHandler'])) {
             $this->httpHandler = $config['httpHandler'];
         }
-        *
         */
 
         if (isset($config['keyFile']) && !empty($config['keyFile'])) {
@@ -211,7 +210,6 @@ class Config
         if ($this->httpHandler) {
             $config['httpHandler'] = $this->httpHandler;
         }
-        *
         */
 
         if ($this->keyFile) {
