@@ -20,11 +20,16 @@ class GoogleNaturalLanguagePhpExceptionTest extends PHPUnit_Framework_TestCase
     public function testApiJsonException() {
         $this->expectException(CustomException::class);
 
-        throw new CustomException(json_encode([
-          'errors' => [
-            'code' => 1
-          ]
-        ]));
+        throw new CustomException(json_encode(
+            [
+                'errors' => [
+                    'code' => 1
+                ],
+                'status' => 404,
+                'title' => 'Not Found',
+                'detail' => 'Details'
+            ]
+        ));
     }
 
     public function testCheapskateTriggerException() {
