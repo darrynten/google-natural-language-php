@@ -31,16 +31,16 @@ class GoogleNaturalLanguage
     /**
      * Keeps a copy of the language client
      *
-     * @var object $_languageClient
+     * @var object $languageClient
      */
-    private $_languageClient;
+    private $languageClient;
 
     /**
      * The local cache
      *
-     * @var AnyCache $_cache
+     * @var AnyCache $cache
      */
-    private $_cache;
+    private $cache;
 
     /**
      * The text to perform actions on
@@ -59,8 +59,8 @@ class GoogleNaturalLanguage
     public function __construct($config)
     {
         $this->config = new Config($config);
-        $this->_cache = new AnyCache();
-        $this->_languageClient = new NaturalLanguageClient(
+        $this->cache = new AnyCache();
+        $this->languageClient = new NaturalLanguageClient(
             $this->config->getNaturalLanguageConfig()
         );
     }
@@ -75,7 +75,7 @@ class GoogleNaturalLanguage
     public function setText($text)
     {
         $this->originalText = $text;
-        $this->_checkCheapskate();
+        $this->checkCheapskate();
     }
 
     /**
@@ -88,9 +88,9 @@ class GoogleNaturalLanguage
         $cacheKey = '__google_natural_language__entities_' .
             md5($this->originalText) . '_';
 
-        if (!$result = unserialize($this->_cache->get($cacheKey))) {
-            $result = $this->_languageClient->analyzeEntities($this->originalText);
-            $this->_cache->put($cacheKey, serialize($result), 9999999);
+        if (!$result = unserialize($this->cache->get($cacheKey))) {
+            $result = $this->languageClient->analyzeEntities($this->originalText);
+            $this->cache->put($cacheKey, serialize($result), 9999999);
         }
 
         return $result;
@@ -106,9 +106,9 @@ class GoogleNaturalLanguage
         $cacheKey = '__google_natural_language__sentiment_' .
             md5($this->originalText) . '_';
 
-        if (!$result = unserialize($this->_cache->get($cacheKey))) {
-            $result = $this->_languageClient->analyzeSentiment($this->originalText);
-            $this->_cache->put($cacheKey, serialize($result), 9999999);
+        if (!$result = unserialize($this->cache->get($cacheKey))) {
+            $result = $this->languageClient->analyzeSentiment($this->originalText);
+            $this->cache->put($cacheKey, serialize($result), 9999999);
         }
 
         return $result;
@@ -124,9 +124,9 @@ class GoogleNaturalLanguage
         $cacheKey = '__google_natural_language__syntax_' .
             md5($this->originalText) . '_';
 
-        if (!$result = unserialize($this->_cache->get($cacheKey))) {
-            $result = $this->_languageClient->analyzeSyntax($this->originalText);
-            $this->_cache->put($cacheKey, serialize($result), 9999999);
+        if (!$result = unserialize($this->cache->get($cacheKey))) {
+            $result = $this->languageClient->analyzeSyntax($this->originalText);
+            $this->cache->put($cacheKey, serialize($result), 9999999);
         }
 
         return $result;
@@ -142,9 +142,9 @@ class GoogleNaturalLanguage
         $cacheKey = '__google_natural_language__all_' .
             md5($this->originalText) . '_';
 
-        if (!$result = unserialize($this->_cache->get($cacheKey))) {
-            $result = $this->_languageClient->annotateText($this->originalText);
-            $this->_cache->put($cacheKey, serialize($result), 9999999);
+        if (!$result = unserialize($this->cache->get($cacheKey))) {
+            $result = $this->languageClient->annotateText($this->originalText);
+            $this->cache->put($cacheKey, serialize($result), 9999999);
         }
 
         return $result;
@@ -160,7 +160,7 @@ class GoogleNaturalLanguage
      * @throws CustomException
      * @return void
      */
-    private function _checkCheapskate()
+    private function checkCheapskate()
     {
         if (strlen($this->originalText) > 999) {
             if ($this->config->cheapskate === true) {
@@ -181,7 +181,7 @@ class GoogleNaturalLanguage
      *
      * @return void
      */
-    public function setType($type) 
+    public function setType($type)
     {
         if (Validation::isValidType($type)) {
             $this->config->type = $type;
@@ -195,7 +195,7 @@ class GoogleNaturalLanguage
      *
      * @return void
      */
-    public function setEncoding($encoding) 
+    public function setEncoding($encoding)
     {
         if (Validation::isValidEncoding($encoding)) {
             $this->config->encoding = $encoding;
@@ -240,6 +240,3 @@ class GoogleNaturalLanguage
         $this->config->cache = (bool)$value;
     }
 }
-
-
-
