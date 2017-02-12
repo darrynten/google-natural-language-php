@@ -181,7 +181,7 @@ class GoogleNaturalLanguage
      *
      * @return void
      */
-    public function setType($type) 
+    public function setType($type)
     {
         if (Validation::isValidType($type)) {
             $this->config->type = $type;
@@ -195,7 +195,7 @@ class GoogleNaturalLanguage
      *
      * @return void
      */
-    public function setEncoding($encoding) 
+    public function setEncoding($encoding)
     {
         if (Validation::isValidEncoding($encoding)) {
             $this->config->encoding = $encoding;
@@ -240,6 +240,3 @@ class GoogleNaturalLanguage
         $this->config->cache = (bool)$value;
     }
 }
-
-
-
