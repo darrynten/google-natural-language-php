@@ -17,7 +17,8 @@ class GoogleNaturalLanguagePhpExceptionTest extends PHPUnit_Framework_TestCase
         ], 'xxx');
     }
 
-    public function testApiJsonException() {
+    public function testApiJsonException()
+    {
         $this->expectException(CustomException::class);
 
         throw new CustomException(json_encode(
@@ -32,7 +33,8 @@ class GoogleNaturalLanguagePhpExceptionTest extends PHPUnit_Framework_TestCase
         ));
     }
 
-    public function testCheapskateTriggerException() {
+    public function testCheapskateTriggerException()
+    {
         $this->expectException(CustomException::class);
 
         $config = [
@@ -45,4 +47,3 @@ class GoogleNaturalLanguagePhpExceptionTest extends PHPUnit_Framework_TestCase
         $instance->setText(str_repeat('test ', 1000));
     }
 }
-

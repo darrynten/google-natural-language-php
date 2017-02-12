@@ -146,7 +146,7 @@ class Config
 
         /**
          * TODO
-         
+
         if (isset($config['authCache']) && !empty($config['authCache'])) {
             $this->authCache = (bool)$config['cache'];
         }
