@@ -1,5 +1,10 @@
 ## google-natural-language-php
 
+![Travis Build Status](https://travis-ci.org/darrynten/google-natural-language-php.svg?branch=master)
+![StyleCI Status](https://styleci.io/repos/81687310/shield?branch=master)
+![Packagist Version](https://img.shields.io/packagist/v/darrynten/google-natural-language-php.svg)
+![MIT License](https://img.shields.io/github/license/darrynten/google-natural-language-php.svg)
+
 An unofficial, fully unit tested Google Natural Language PHP client with 
 extra sugar.
 
