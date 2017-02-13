@@ -29,7 +29,7 @@ class Config
      *
      * @var string $type
      */
-    private $type = 'PLAIN_TEXT';
+    public $type = 'PLAIN_TEXT';
 
     /**
      * The encoding
@@ -38,7 +38,7 @@ class Config
      *
      * @var string $encoding
      */
-    private $encoding = 'UTF8';
+    public $encoding = 'UTF8';
 
     /**
      * The language
@@ -47,7 +47,7 @@ class Config
      *
      * @var string $language The language in either `en` or `en-ZA` format
      */
-    private $language;
+    public $language;
 
     /**
      * Whether or not to use caching.
@@ -56,14 +56,14 @@ class Config
      *
      * @var boolean $cache
      */
-    private $cache = true;
+    public $cache = true;
 
     /**
      * Cheapskate mode - trim text at 1000 chars
      *
      * @var boolean $cheapskate
      */
-    private $cheapskate = true;
+    public $cheapskate = true;
 
     /**
      * Custom Auth Cache

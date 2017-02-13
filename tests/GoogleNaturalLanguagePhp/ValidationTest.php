@@ -3,9 +3,7 @@
 namespace DarrynTen\GoogleNaturalLanguagePhp\Tests;
 
 use PHPUnit_Framework_TestCase;
-
 use DarrynTen\GoogleNaturalLanguagePhp\Validation;
-use DarrynTen\GoogleNaturalLanguagePhp\GoogleNaturalLanguage;
 
 class ValidationTest extends PHPUnit_Framework_TestCase
 {
