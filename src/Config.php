@@ -2,7 +2,7 @@
 
 namespace DarrynTen\GoogleNaturalLanguagePhp;
 
-use DarrynTen\GoogleNaturalLanguagePhp\CustomException;
+use Psr\Cache\CacheItemPoolInterface;
 
 /**
  * GoogleNaturalLanguage Config
@@ -20,14 +20,14 @@ class Config
      *
      * @var string $projectId
      */
-    public $projectId;
+    private $projectId;
 
     /**
      * The type of text.
      *
      * Options are `PLAIN_TEXT` and `HTML`
      *
-     * @var enum $type
+     * @var string $type
      */
     public $type = 'PLAIN_TEXT';
 
@@ -36,7 +36,7 @@ class Config
      *
      * Options are `UTF8`, `UTF16`, `UTF32` and `NONE`
      *
-     * @var enum $encoding
+     * @var string $encoding
      */
     public $encoding = 'UTF8';
 
@@ -45,7 +45,7 @@ class Config
      *
      * If this is not set then it is auto-detected.
      *
-     * @var $language The language in either `en` or `en-ZA` format
+     * @var string $language The language in either `en` or `en-ZA` format
      */
     public $language;
 
@@ -70,56 +70,56 @@ class Config
      *
      * @var CacheItemPoolInterface $authCache
      */
-    public $authCache;
+    private $authCache;
 
     /**
      * Custom Auth Cache options
      *
      * @var array $authCacheOptions
      */
-    public $authCacheOptions;
+    private $authCacheOptions;
 
     /**
      * Custom Auth HTTP Handler
      *
      * @var callable $authHttpHandler
      */
-    public $authHttpHandler;
+    private $authHttpHandler;
 
     /**
      * Custom REST HTTP Handler
      *
      * @var callable $httpHandler
      */
-    public $httpHandler;
+    private $httpHandler;
 
     /**
      * A custom key file for auth
      *
-     * @var json $keyFile
+     * @var string $keyFile
      */
-    public $keyFile;
+    private $keyFile;
 
     /**
      * A path on disk to the key file
      *
      * @var string $keyFilePath
      */
-    public $keyFilePath;
+    private $keyFilePath;
 
     /**
      * The number of times to retry failed calls
      *
      * @var integer $retries
      */
-    public $retries = 3;
+    private $retries = 3;
 
     /**
      * The scopes
      *
      * @var array $scopes
      */
-    public $scopes;
+    private $scopes;
 
     /**
      * Construct the config object

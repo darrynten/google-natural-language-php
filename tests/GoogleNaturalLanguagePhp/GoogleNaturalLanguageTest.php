@@ -3,7 +3,6 @@
 namespace DarrynTen\GoogleNaturalLanguagePhp\Tests\GoogleNaturalLanguagePhp;
 
 use PHPUnit_Framework_TestCase;
-use DarrynTen\AnyCache\AnyCache;
 
 use DarrynTen\GoogleNaturalLanguagePhp\GoogleNaturalLanguage;
 
