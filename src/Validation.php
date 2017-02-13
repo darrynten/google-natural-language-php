@@ -18,7 +18,7 @@ class Validation
      *
      * @var array $validEncodings
      */
-    protected static $validEncodings = [
+    private static $validEncodings = [
         'UTF8',
         'UTF16',
         'UTF32',
@@ -30,7 +30,7 @@ class Validation
      *
      * @var array $validTypes
      */
-    protected static $validTypes = [
+    private static $validTypes = [
         'PLAIN_TEXT',
         'HTML',
     ];
@@ -38,16 +38,16 @@ class Validation
     /**
      * A valid ISO language regex (en)
      *
-     * @var regex $validISOLanguageRegex 2 characters
+     * @var string $validISOLanguageRegex Regex for 2 characters
      */
-    protected static $validISOLanguageRegex = '/^[a-z]{2}$/';
+    private static $validISOLanguageRegex = '/^[a-z]{2}$/';
 
     /**
      * A valid BCP-47 language regex (en-ZA)
      *
-     * @var regex $validBCP47LanguageRegex Two lowecase, dash, 2 uppercase
+     * @var string $validBCP47LanguageRegex Regex for two lowecase, dash, 2 uppercase
      */
-    protected static $validBCP47LanguageRegex = '/^[a-z]{2}\-[A-Z]{2}$/';
+    private static $validBCP47LanguageRegex = '/^[a-z]{2}\-[A-Z]{2}$/';
 
     /**
      * Check if a type is valid

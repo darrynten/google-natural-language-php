@@ -3,12 +3,7 @@
 namespace DarrynTen\GoogleNaturalLanguagePhp;
 
 use Google\Cloud\NaturalLanguage\NaturalLanguageClient;
-use GuzzleHttp\Client;
 use DarrynTen\AnyCache\AnyCache;
-
-use DarrynTen\GoogleNaturalLanguagePhp\CustomException;
-use DarrynTen\GoogleNaturalLanguagePhp\Validator;
-use DarrynTen\GoogleNaturalLanguagePhp\Config;
 
 /**
  * Google Natural Language Client
@@ -165,6 +160,7 @@ class GoogleNaturalLanguage
         if (strlen($this->originalText) > 999) {
             if ($this->config->cheapskate === true) {
                 throw new CustomException(
+
                     'Text too long. 1000+
                     Characters incurrs additional charges. You can set
                     `cheapskate` to false in config to disable this
@@ -177,7 +173,7 @@ class GoogleNaturalLanguage
     /**
      * Sets the document type
      *
-     * @param enum $type Either `HTML` or `PLAIN_TEXT`
+     * @param string $type Either `HTML` or `PLAIN_TEXT`
      *
      * @return void
      */
@@ -191,7 +187,7 @@ class GoogleNaturalLanguage
     /**
      * Sets the encoding
      *
-     * @param enum $encoding Must be UTF8, UTF16, UTF32 or NONE
+     * @param string $encoding Must be UTF8, UTF16, UTF32 or NONE
      *
      * @return void
      */
