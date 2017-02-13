@@ -148,21 +148,21 @@ class Config
          * TODO
 
         if (isset($config['authCache']) && !empty($config['authCache'])) {
-        $this->authCache = (bool)$config['cache'];
+            $this->authCache = (bool)$config['cache'];
         }
 
         if (isset($config['authCacheOptions']) && !empty($config['authCacheOptions'])) {
-        $this->authCacheOptions = $config['authCacheOptions'];
+            $this->authCacheOptions = $config['authCacheOptions'];
         }
 
         if (isset($config['authHttpHandler']) && !empty($config['authHttpHandler'])) {
-        $this->authHttpHandler = $config['authHttpHandler'];
+            $this->authHttpHandler = $config['authHttpHandler'];
         }
 
         if (isset($config['httpHandler']) && !empty($config['httpHandler'])) {
-        $this->httpHandler = $config['httpHandler'];
+            $this->httpHandler = $config['httpHandler'];
         }
-         */
+        */
 
         if (isset($config['keyFile']) && !empty($config['keyFile'])) {
             $this->keyFile = $config['keyFile'];
@@ -196,21 +196,21 @@ class Config
          * TODO
          *
         if ($this->authCache) {
-        $config['authCache'] = $this->authCache;
+            $config['authCache'] = $this->authCache;
         }
 
         if ($this->authCache && $this->authCacheOptions) {
-        $config['authCacheOptions'] = $this->authCacheOptions;
+            $config['authCacheOptions'] = $this->authCacheOptions;
         }
 
         if ($this->authHttpHandler) {
-        $config['authHttpHandler'] = $this->authHttpHandler;
+            $config['authHttpHandler'] = $this->authHttpHandler;
         }
 
         if ($this->httpHandler) {
-        $config['httpHandler'] = $this->httpHandler;
+            $config['httpHandler'] = $this->httpHandler;
         }
-         */
+        */
 
         if ($this->keyFile) {
             $config['keyFile'] = $this->keyFile;

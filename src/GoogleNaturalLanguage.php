@@ -160,7 +160,6 @@ class GoogleNaturalLanguage
         if (strlen($this->originalText) > 999) {
             if ($this->config->cheapskate === true) {
                 throw new CustomException(
-
                     'Text too long. 1000+
                     Characters incurrs additional charges. You can set
                     `cheapskate` to false in config to disable this
