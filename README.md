@@ -158,6 +158,7 @@ example, only the People, or only the Locations
 
 ## Acknowledgements
 
+* [Dmitry Semenov](https://github.com/mxnr) for being such a legend.
+* [Bradley Weston](https://github.com/bweston92) for coming out of nowhere.
+
 * Open a PR and put yourself here :)
-
-

@@ -11,6 +11,8 @@ use DarrynTen\AnyCache\AnyCache;
  * @category Library
  * @package  GoogleNaturalLanguagePhp
  * @author   Darryn Ten <darrynten@github.com>
+ * @author   Dmitry Semenov <mxnr@github.com>
+ * @author   Bradley Weston <bweston92@github.com>
  * @license  MIT <https://github.com/darrynten/google-natural-language-php/LICENSE>
  * @link     https://github.com/darrynten/google-natural-language-php
  */
