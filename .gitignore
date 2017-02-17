@@ -3,3 +3,4 @@ composer.lock
 /vendor/
 /bin/
 /tests/coverage/
+clover.xml

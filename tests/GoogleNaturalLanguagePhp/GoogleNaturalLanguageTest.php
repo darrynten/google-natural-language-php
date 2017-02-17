@@ -93,7 +93,7 @@ class GoogleNaturalLanguageTest extends PHPUnit_Framework_TestCase
         if (getenv('DO_LIVE_API_TESTS') == "true") {
             $config = [
                 'projectId' => 'project-id',
-                'cheapskate' => true,
+                'cheapskate' => false,
                 'cache' => true,
             ];
 
