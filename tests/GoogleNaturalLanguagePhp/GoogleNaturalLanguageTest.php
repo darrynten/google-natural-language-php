@@ -3,11 +3,18 @@
 namespace DarrynTen\GoogleNaturalLanguagePhp\Tests\GoogleNaturalLanguagePhp;
 
 use PHPUnit_Framework_TestCase;
+use Mockery as m;
+use ReflectionClass;
 
 use DarrynTen\GoogleNaturalLanguagePhp\GoogleNaturalLanguage;
 
 class GoogleNaturalLanguageTest extends PHPUnit_Framework_TestCase
 {
+    public function tearDown()
+    {
+        m::close();
+    }
+  
     public function testConstruct()
     {
         $config = [
@@ -61,120 +68,105 @@ class GoogleNaturalLanguageTest extends PHPUnit_Framework_TestCase
 
     public function testGetEntities()
     {
-        if (getenv('DO_LIVE_API_TESTS') == "true") {
-            $config = [
-                'projectId' => 'project-id',
-                'cheapskate' => true,
-                'cache' => true,
-            ];
+        $config = [
+            'projectId' => 'project-id',
+            'cheapskate' => true,
+            'cache' => true,
+        ];
 
-            $instance = new GoogleNaturalLanguage($config);
+        $client = m::mock(NaturalLanguageClient::class);
 
-            $instance->setText('A duck and a cat in a field at night');
+        $client->shouldReceive('analyzeEntities')
+            ->once()
+            ->andReturn();
 
-            $entities = $instance->getEntities();
+        $instance = new GoogleNaturalLanguage($config);
 
-            $retrievedEntities = $entities->entities();
-            $this->assertInternalType('array', $retrievedEntities);
+        // Need to inject mock to a private property
+        $reflection = new ReflectionClass($instance);
+        $reflectedClient = $reflection->getProperty('languageClient');
+        $reflectedClient->setAccessible(true);
+        $reflectedClient->setValue($instance, $client);
 
-            $this->assertEquals('duck', $retrievedEntities[0]['name']);
-            $this->assertEquals('OTHER', $retrievedEntities[0]['type']);
-
-            $this->assertEquals('cat', $retrievedEntities[1]['name']);
-            $this->assertEquals('OTHER', $retrievedEntities[1]['type']);
-
-            $this->assertEquals('field', $retrievedEntities[2]['name']);
-            $this->assertEquals('LOCATION', $retrievedEntities[2]['type']);
-        }
+        $instance->setText('A duck and a cat in a field at night');
+        $entities = $instance->getEntities();
     }
 
     public function testGetSyntax()
     {
-        if (getenv('DO_LIVE_API_TESTS') == "true") {
-            $config = [
-                'projectId' => 'project-id',
-                'cheapskate' => false,
-                'cache' => true,
-            ];
+        $config = [
+            'projectId' => 'project-id',
+            'cheapskate' => true,
+            'cache' => true,
+        ];
 
-            $instance = new GoogleNaturalLanguage($config);
+        $client = m::mock(NaturalLanguageClient::class);
 
-            $instance->setText('A duck and a cat in a field at night');
+        $client->shouldReceive('analyzeSyntax')
+            ->once()
+            ->andReturn();
 
-            $syntax = $instance->getSyntax();
+        $instance = new GoogleNaturalLanguage($config);
 
-            $sentences = $syntax->sentences();
-            $tokens = $syntax->tokens();
+        // Need to inject mock to a private property
+        $reflection = new ReflectionClass($instance);
+        $reflectedClient = $reflection->getProperty('languageClient');
+        $reflectedClient->setAccessible(true);
+        $reflectedClient->setValue($instance, $client);
 
-            $this->assertInternalType('array', $sentences);
-            $this->assertInternalType('array', $tokens);
-
-            $this->assertEquals('A duck and a cat in a field at night', $sentences[0]['text']['content']);
-
-            $this->assertEquals(0, $sentences[0]['beginOffset']);
-
-            $this->assertEquals('duck', $tokens[1]['text']['content']);
-            $this->assertEquals('NOUN', $tokens[1]['partOfSpeech']['tag']);
-            $this->assertEquals('SINGULAR', $tokens[1]['partOfSpeech']['number']);
-        }
+        $instance->setText('A duck and a cat in a field at night');
+        $entities = $instance->getSyntax();
     }
 
     public function testGetSentiment()
     {
-        if (getenv('DO_LIVE_API_TESTS') == "true") {
-            $config = [
-                'projectId' => 'project-id',
-                'cheapskate' => true,
-                'cache' => true,
-            ];
+        $config = [
+            'projectId' => 'project-id',
+            'cheapskate' => true,
+            'cache' => true,
+        ];
 
-            $instance = new GoogleNaturalLanguage($config);
+        $client = m::mock(NaturalLanguageClient::class);
 
-            $instance->setText('A duck and a cat in a field at night');
+        $client->shouldReceive('analyzeSentiment')
+            ->once()
+            ->andReturn();
 
-            $sentiment = $instance->getSentiment();
+        $instance = new GoogleNaturalLanguage($config);
 
-            $this->assertInternalType('array', $sentiment->documentSentiment());
+        // Need to inject mock to a private property
+        $reflection = new ReflectionClass($instance);
+        $reflectedClient = $reflection->getProperty('languageClient');
+        $reflectedClient->setAccessible(true);
+        $reflectedClient->setValue($instance, $client);
 
-            $documentSentiment = $sentiment->documentSentiment();
-
-            $this->assertInternalType('double', $documentSentiment['magnitude']);
-            $this->assertInternalType('double', $documentSentiment['score']);
-        }
+        $instance->setText('A duck and a cat in a field at night');
+        $entities = $instance->getSentiment();
     }
 
     public function testGetAll()
     {
-        if (getenv('DO_LIVE_API_TESTS') == "true") {
-            $config = [
-                'projectId' => 'project-id',
-                'cheapskate' => true,
-                'cache' => true,
-            ];
+        $config = [
+            'projectId' => 'project-id',
+            'cheapskate' => false,
+            'cache' => true,
+        ];
 
-            $instance = new GoogleNaturalLanguage($config);
+        $client = m::mock(NaturalLanguageClient::class);
 
-            $instance->setText('A duck and a cat in a field at night');
+        $client->shouldReceive('annotateText')
+            ->once()
+            ->andReturn();
 
-            $all = $instance->getAll();
+        $instance = new GoogleNaturalLanguage($config);
 
-            $entities = $all->entities();
-            $sentences = $all->sentences();
-            $tokens = $all->tokens();
-            $sentiment = $all->documentSentiment();
-            $language = $all->language();
+        // Need to inject mock to a private property
+        $reflection = new ReflectionClass($instance);
+        $reflectedClient = $reflection->getProperty('languageClient');
+        $reflectedClient->setAccessible(true);
+        $reflectedClient->setValue($instance, $client);
 
-            $this->assertInternalType('array', $entities);
-            $this->assertInternalType('array', $entities[0]);
-            $this->assertInternalType('array', $sentences);
-            $this->assertInternalType('array', $sentences[0]);
-            $this->assertInternalType('array', $tokens);
-            $this->assertInternalType('array', $tokens[0]);
-            $this->assertInternalType('array', $sentiment);
-            $this->assertInternalType('double', $sentiment['magnitude']);
-            $this->assertInternalType('string', $language);
-
-            $this->assertEquals('en', $language);
-        }
+        $instance->setText('A duck and a cat in a field at night');
+        $entities = $instance->getAll();
     }
 }
