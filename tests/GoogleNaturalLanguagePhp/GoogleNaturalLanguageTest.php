@@ -69,16 +69,16 @@ class GoogleNaturalLanguageTest extends PHPUnit_Framework_TestCase
     public function testGetEntities()
     {
         $config = [
-          'projectId' => 'project-id',
-          'cheapskate' => true,
-          'cache' => true,
+            'projectId' => 'project-id',
+            'cheapskate' => true,
+            'cache' => true,
         ];
 
         $client = m::mock(NaturalLanguageClient::class);
 
         $client->shouldReceive('analyzeEntities')
-          ->once()
-          ->andReturn();
+            ->once()
+            ->andReturn();
 
         $instance = new GoogleNaturalLanguage($config);
 
@@ -95,16 +95,16 @@ class GoogleNaturalLanguageTest extends PHPUnit_Framework_TestCase
     public function testGetSyntax()
     {
         $config = [
-          'projectId' => 'project-id',
-          'cheapskate' => true,
-          'cache' => true,
+            'projectId' => 'project-id',
+            'cheapskate' => true,
+            'cache' => true,
         ];
 
         $client = m::mock(NaturalLanguageClient::class);
 
         $client->shouldReceive('analyzeSyntax')
-          ->once()
-          ->andReturn();
+            ->once()
+            ->andReturn();
 
         $instance = new GoogleNaturalLanguage($config);
 
@@ -121,16 +121,16 @@ class GoogleNaturalLanguageTest extends PHPUnit_Framework_TestCase
     public function testGetSentiment()
     {
         $config = [
-          'projectId' => 'project-id',
-          'cheapskate' => true,
-          'cache' => true,
+            'projectId' => 'project-id',
+            'cheapskate' => true,
+            'cache' => true,
         ];
 
         $client = m::mock(NaturalLanguageClient::class);
 
         $client->shouldReceive('analyzeSentiment')
-          ->once()
-          ->andReturn();
+            ->once()
+            ->andReturn();
 
         $instance = new GoogleNaturalLanguage($config);
 
@@ -147,16 +147,16 @@ class GoogleNaturalLanguageTest extends PHPUnit_Framework_TestCase
     public function testGetAll()
     {
         $config = [
-          'projectId' => 'project-id',
-          'cheapskate' => false,
-          'cache' => true,
+            'projectId' => 'project-id',
+            'cheapskate' => false,
+            'cache' => true,
         ];
 
         $client = m::mock(NaturalLanguageClient::class);
 
         $client->shouldReceive('annotateText')
-          ->once()
-          ->andReturn();
+            ->once()
+            ->andReturn();
 
         $instance = new GoogleNaturalLanguage($config);
 
