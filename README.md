@@ -2,6 +2,7 @@
 
 ![Travis Build Status](https://travis-ci.org/darrynten/google-natural-language-php.svg?branch=master)
 ![StyleCI Status](https://styleci.io/repos/81687310/shield?branch=master)
+[![codecov](https://codecov.io/gh/darrynten/google-natural-language-php/branch/master/graph/badge.svg)](https://codecov.io/gh/darrynten/google-natural-language-php)
 ![Packagist Version](https://img.shields.io/packagist/v/darrynten/google-natural-language-php.svg)
 ![MIT License](https://img.shields.io/github/license/darrynten/google-natural-language-php.svg)
 
