@@ -132,23 +132,6 @@ Usage of Google\Cloud\Storage\StorageObject is presently not possible.
 * Custom `authCache` and `authCacheOptions`
 * Custom `httpHandler` and `authHttpHandler`
 
-## Test Coverage
-
-Test coverage is 100% but may not be immediately apparent. This is due
-to the fact that the prediction service is paid for, and running many
-unit tests can become quite expensive.
-
-As a result you need to enable the tests with
-
-```bash
-export DO_LIVE_API_TESTS=true
-```
-
-before you run `phpunit`.
-
-It is also important to note that tests will run with a transient
-cache and as a result no caching persists across tests.
-
 ## Roadmap
 
 - [ ] - Get Entities of Type - Will allow the ability to retrieve, for
