@@ -112,6 +112,24 @@ class GoogleNaturalLanguage
     }
 
     /**
+     * Get the sentiment analysis
+     *
+     * @return mixed
+     */
+    public function getEntitySentiment()
+    {
+        $cacheKey = '__google_natural_language__sentiment_' .
+            md5($this->originalText) . '_';
+
+        if (!$result = unserialize($this->cache->get($cacheKey))) {
+            $result = $this->languageClient->analyzeEntitySentiment($this->originalText);
+            $this->cache->put($cacheKey, serialize($result), 9999999);
+        }
+
+        return $result;
+    }
+
+    /**
      * Get the syntax analysis
      *
      * @return mixed
