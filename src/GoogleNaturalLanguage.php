@@ -2,7 +2,7 @@
 
 namespace DarrynTen\GoogleNaturalLanguagePhp;
 
-use Google\Cloud\NaturalLanguage\NaturalLanguageClient;
+use Google\Cloud\Language\LanguageClient;
 use DarrynTen\AnyCache\AnyCache;
 
 /**
@@ -52,12 +52,13 @@ class GoogleNaturalLanguage
      * Bootstraps the config and the cache, then loads the client
      *
      * @param array $config Configuration options
+     * @throws CustomException
      */
     public function __construct($config)
     {
         $this->config = new Config($config);
         $this->cache = new AnyCache();
-        $this->languageClient = new NaturalLanguageClient(
+        $this->languageClient = new LanguageClient(
             $this->config->getNaturalLanguageConfig()
         );
     }
@@ -68,6 +69,7 @@ class GoogleNaturalLanguage
      * @param string $text The text to be analysed
      *
      * @return void
+     * @throws CustomException
      */
     public function setText($text)
     {
@@ -105,6 +107,24 @@ class GoogleNaturalLanguage
 
         if (!$result = unserialize($this->cache->get($cacheKey))) {
             $result = $this->languageClient->analyzeSentiment($this->originalText);
+            $this->cache->put($cacheKey, serialize($result), 9999999);
+        }
+
+        return $result;
+    }
+
+    /**
+     * Get the sentiment analysis
+     *
+     * @return mixed
+     */
+    public function getEntitySentiment()
+    {
+        $cacheKey = '__google_natural_language__sentiment_' .
+            md5($this->originalText) . '_';
+
+        if (!$result = unserialize($this->cache->get($cacheKey))) {
+            $result = $this->languageClient->analyzeEntitySentiment($this->originalText);
             $this->cache->put($cacheKey, serialize($result), 9999999);
         }
 
