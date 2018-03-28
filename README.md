@@ -132,6 +132,16 @@ Usage of Google\Cloud\Storage\StorageObject is presently not possible.
 * Custom `authCache` and `authCacheOptions`
 * Custom `httpHandler` and `authHttpHandler`
 
+## Entity Sentiment
+
+You can retrieve the sentiment of some text
+
+```
+$instance = new GoogleNaturalLanguage($config);
+$instance->setText('A duck and a cat in a field at night');
+$sentiment = $instance->getEntitySentiment();
+```
+
 ## Roadmap
 
 - [ ] - Get Entities of Type - Will allow the ability to retrieve, for
@@ -144,5 +154,6 @@ example, only the People, or only the Locations
 
 * [Dmitry Semenov](https://github.com/mxnr) for being such a legend.
 * [Bradley Weston](https://github.com/bweston92) for coming out of nowhere.
+* [blaisedufrain](https://github.com/blaisedufrain) for the sentiment analysis.
 
 * Open a PR and put yourself here :)
