@@ -120,7 +120,7 @@ class GoogleNaturalLanguage
      */
     public function getEntitySentiment()
     {
-        $cacheKey = '__google_natural_language__sentiment_' .
+        $cacheKey = '__google_natural_language__sentiment_entities_' .
             md5($this->originalText) . '_';
 
         if (!$result = unserialize($this->cache->get($cacheKey))) {
