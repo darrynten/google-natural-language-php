@@ -1,0 +1,63 @@
+ruleset:
+
+  merge_for_me:
+    name: "Merge pull requests for me when I start a comment with LGTM"
+    events: issue_comment
+    when:
+      - action = "created"
+      - user.login = "darrynten"
+      - body matches "/^LGTM/"
+    merge: true
+
+  short_description:
+    name: "Close issues with short descriptions"
+    events: issues
+    close: true
+    label: invalid
+    when: length(body) < 50
+    message: >
+      @{{ user.login }}, this issue has been closed because the description was too short. Please ensure your comment is at least 50 characters long, and is sufficiently descriptive. Thanks!
+
+  broken_links:
+    name: "Check for broken links in README.md"
+    events: pull_request
+    message: >
+      @{{ user.login }}, one of the links in the diff did not return an HTTP
+      status code of 200. Please check for broken links. The first broken link
+      is: {{ diff_links.broken.0 }}
+    when:
+      - action = "opened" or action = "reopened"
+      - files has "README.md"
+      - count(diff_links.broken) > 0
+
+  style_screenshots:
+    name: "Require screenshot when there are style changes"
+    events: pull_request
+    message: >
+      @{{ user.login }}, please include screenshot(s) when making style changes so
+      we can review the new look and feel. Thanks!
+    when:
+      - action = "opened"
+      - count(filter(files, "[name=/\.css$/]")) > 0
+      - not(body matches "/!\[image\]\(.*?\)/")
+
+  require_unit_tests:
+    name: "Require unit tests for pull requests"
+    events: pull_request
+    message: >
+      @{{ user.login }}, remember that all pull requests should be accompanied with
+      unit tests per our contributing guidelines. Please `/cc` one of our
+      maintainers if you need help with this!
+    when:
+      - action = "opened"
+      - count(filter(files, "[name=/^src\/]")) > 1
+      - count(filter(files, "[name=/^tests\/]")) = 0
+
+  auto_bug_tag:
+    name: Label issues as bug when checked in GitHub template
+    events: issues
+    label: bug
+    when:
+      - action = "opened"
+      - body matches "/[\s*x\s*] Bug/"v
+
