@@ -132,22 +132,15 @@ Usage of Google\Cloud\Storage\StorageObject is presently not possible.
 * Custom `authCache` and `authCacheOptions`
 * Custom `httpHandler` and `authHttpHandler`
 
-## Test Coverage
+## Entity Sentiment
 
-Test coverage is 100% but may not be immediately apparent. This is due
-to the fact that the prediction service is paid for, and running many
-unit tests can become quite expensive.
+You can retrieve the sentiment of some text
 
-As a result you need to enable the tests with
-
-```bash
-export DO_LIVE_API_TESTS=true
 ```
-
-before you run `phpunit`.
-
-It is also important to note that tests will run with a transient
-cache and as a result no caching persists across tests.
+$instance = new GoogleNaturalLanguage($config);
+$instance->setText('A duck and a cat in a field at night');
+$sentiment = $instance->getEntitySentiment();
+```
 
 ## Roadmap
 
@@ -161,5 +154,6 @@ example, only the People, or only the Locations
 
 * [Dmitry Semenov](https://github.com/mxnr) for being such a legend.
 * [Bradley Weston](https://github.com/bweston92) for coming out of nowhere.
+* [blaisedufrain](https://github.com/blaisedufrain) for the sentiment analysis.
 
 * Open a PR and put yourself here :)

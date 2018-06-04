@@ -74,7 +74,7 @@ class GoogleNaturalLanguageTest extends PHPUnit_Framework_TestCase
             'cache' => true,
         ];
 
-        $client = m::mock(NaturalLanguageClient::class);
+        $client = m::mock(LanguageClient::class);
 
         $client->shouldReceive('analyzeEntities')
             ->once()
@@ -100,7 +100,7 @@ class GoogleNaturalLanguageTest extends PHPUnit_Framework_TestCase
             'cache' => true,
         ];
 
-        $client = m::mock(NaturalLanguageClient::class);
+        $client = m::mock(LanguageClient::class);
 
         $client->shouldReceive('analyzeSyntax')
             ->once()
@@ -126,7 +126,7 @@ class GoogleNaturalLanguageTest extends PHPUnit_Framework_TestCase
             'cache' => true,
         ];
 
-        $client = m::mock(NaturalLanguageClient::class);
+        $client = m::mock(LanguageClient::class);
 
         $client->shouldReceive('analyzeSentiment')
             ->once()
@@ -144,6 +144,32 @@ class GoogleNaturalLanguageTest extends PHPUnit_Framework_TestCase
         $entities = $instance->getSentiment();
     }
 
+    public function testGetEntitySentiment()
+    {
+        $config = [
+            'projectId' => 'project-id',
+            'cheapskate' => true,
+            'cache' => true,
+        ];
+
+        $client = m::mock(LanguageClient::class);
+
+        $client->shouldReceive('analyzeEntitySentiment')
+            ->once()
+            ->andReturn();
+
+        $instance = new GoogleNaturalLanguage($config);
+
+        // Need to inject mock to a private property
+        $reflection = new ReflectionClass($instance);
+        $reflectedClient = $reflection->getProperty('languageClient');
+        $reflectedClient->setAccessible(true);
+        $reflectedClient->setValue($instance, $client);
+
+        $instance->setText('A duck and a cat in a field at night');
+        $entities = $instance->getEntitySentiment();
+    }
+
     public function testGetAll()
     {
         $config = [
@@ -152,7 +178,7 @@ class GoogleNaturalLanguageTest extends PHPUnit_Framework_TestCase
             'cache' => true,
         ];
 
-        $client = m::mock(NaturalLanguageClient::class);
+        $client = m::mock(LanguageClient::class);
 
         $client->shouldReceive('annotateText')
             ->once()
